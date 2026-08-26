@@ -207,7 +207,8 @@ export interface Database {
           }
         }
       }
-      Views: {
+    }
+    Views: {
       [_ in never]: never
     }
     Functions: {
