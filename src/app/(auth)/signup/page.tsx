@@ -4,91 +4,101 @@ import { signup } from "../login/actions";
 
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ message?: string }> }) {
   const { message } = await searchParams;
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
-        <div className="flex flex-col items-center">
-          <div className="w-12 h-12 bg-black flex items-center justify-center rounded-xl mb-6">
-            <Zap className="text-brand w-7 h-7" />
+    <div className="min-h-screen bg-[#f8f9fc] flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Soft Background Gradients */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        {/* Main subtle background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f8f6ff] to-[#f0f4ff]" />
+        
+        {/* Left Side: Tilted Rectangular Glass Layers */}
+        <div className="absolute -left-[10%] top-[10%] w-[60%] h-[120%] bg-gradient-to-tr from-[#e9d5ff]/40 to-[#c084fc]/10 rounded-[3rem] -rotate-12 transform-gpu animate-blob" />
+        <div className="absolute -left-[5%] top-[20%] w-[50%] h-[100%] bg-gradient-to-tr from-[#d8b4fe]/30 to-[#a855f7]/5 rounded-[3rem] -rotate-12 transform-gpu animate-blob animation-delay-2000 backdrop-blur-sm" />
+
+        {/* Right Side: Mirrored Rectangular Glass Layers */}
+        <div className="absolute -right-[10%] -top-[10%] w-[60%] h-[120%] bg-gradient-to-tl from-[#e9d5ff]/40 to-[#c084fc]/10 rounded-[3rem] rotate-12 transform-gpu animate-blob animation-delay-4000" />
+        <div className="absolute -right-[5%] top-[0%] w-[50%] h-[100%] bg-gradient-to-tl from-[#d8b4fe]/30 to-[#a855f7]/5 rounded-[3rem] rotate-12 transform-gpu animate-blob animation-delay-2000 backdrop-blur-sm" />
+        
+        {/* Soft clouds at bottom */}
+        <div className="absolute -bottom-[20%] right-[10%] w-[60%] h-[60%] rounded-full bg-white/60 blur-3xl" />
+        <div className="absolute -bottom-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-[#f3e8ff]/60 blur-3xl" />
+      </div>
+
+      <div className="w-full max-w-md relative z-10">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <div className="w-16 h-16 bg-black flex items-center justify-center rounded-2xl mb-4 shadow-xl shadow-[#818cf8]/20 group hover:scale-105 transition-transform">
+            <Zap className="text-[#818cf8] w-8 h-8 group-hover:animate-pulse" />
           </div>
-          <h2 className="mt-2 text-center text-2xl font-bold text-gray-900">
+          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
             Create an account
           </h2>
         </div>
-        
-        {message && (
-          <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm text-center">
-            {message}
-          </div>
-        )}
 
-        <form className="mt-8 space-y-6" action={signup}>
-          <div className="space-y-4">
-             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+        <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50">
+          <form action={signup} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="fullName">
                 Full Name
               </label>
-              <div className="mt-1">
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-brand focus:border-brand sm:text-sm transition-colors"
-                  placeholder="Jane Doe"
-                />
-              </div>
+              <input
+                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#818cf8]/50 focus:border-[#818cf8] transition-all"
+                id="fullName"
+                name="fullName"
+                type="text"
+                placeholder="Jane Doe"
+                required
+              />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">
+                Email
               </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-brand focus:border-brand sm:text-sm transition-colors"
-                  placeholder="you@example.com"
-                />
-              </div>
+              <input
+                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#818cf8]/50 focus:border-[#818cf8] transition-all"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
             </div>
-
+            
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">
                 Password
               </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-brand focus:border-brand sm:text-sm transition-colors"
-                />
-              </div>
+              <input
+                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#818cf8]/50 focus:border-[#818cf8] transition-all"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                required
+              />
             </div>
-          </div>
 
-          <div>
+            {message && (
+              <div className="p-3 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100">
+                {message}
+              </div>
+            )}
+
             <button
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#818cf8] to-[#a78bfa] hover:from-[#6366f1] hover:to-[#8b5cf6] text-white rounded-xl font-medium shadow-md shadow-indigo-500/20 transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               type="submit"
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors"
             >
-              Sign up
+              Sign Up
             </button>
+          </form>
+
+          <div className="mt-6 text-center text-sm text-gray-500">
+            Already have an account?{" "}
+            <Link href="/" className="text-[#818cf8] font-medium hover:underline">
+              Sign in
+            </Link>
           </div>
-        </form>
-        
-        <div className="text-center text-sm">
-          <span className="text-gray-500">Already have an account? </span>
-          <Link href="/login" className="font-medium text-brand hover:text-red-500">
-            Sign in
-          </Link>
         </div>
       </div>
     </div>
